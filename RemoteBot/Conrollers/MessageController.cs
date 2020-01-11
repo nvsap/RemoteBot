@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RemoteBot.Managers;
+using RemoteBot.Managers.BaseManagers;
 using RemoteBot.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 
 namespace RemoteBot.Conrollers
 {

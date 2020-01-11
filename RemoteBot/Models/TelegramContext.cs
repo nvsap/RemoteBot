@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using RemoteBot.Models.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace RemoteBot.Models
 {
     public class TelegramContext : DbContext
     {
-        //public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
+
+        public DbSet<UserState> UserStates { get; set; }
 
         public TelegramContext()
         {
