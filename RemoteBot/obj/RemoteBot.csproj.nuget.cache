@@ -1,5 +1,12 @@
+<<<<<<< Updated upstream
 {
   "version": 1,
-  "dgSpecHash": "NQMrQ1agi9ASKGZhCX6QS6OcbxggTdhoDWnEdntR0U5uboPTXC28OZbvym7Wc08dceomSNqFxXBQY9e0bDLIXw==",
+  "dgSpecHash": "ZYDM+q/ZH6H/E2fsFxWIgOmT5GgagyDc2vL/IadfZw98xDgpVtzCxWDLG2/8NgE2YMhH4Ua7F5SVN29TLRRQCQ==",
   "success": true
+=======
+{
+  "version": 1,
+  "dgSpecHash": "pDTWRr4upu/oWU/qZ/OuFSd1KQahGDPz59wfaJUiO4Rsd8eY806BUaqmHhoFFXTOKfei8YvKsYeuaT2bD1hApA==",
+  "success": true
+>>>>>>> Stashed changes
 }

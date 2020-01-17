@@ -16,10 +16,17 @@ namespace RemoteBot.Managers.BaseManagers
                 using (TelegramContext db = new TelegramContext())
                 {
                     var update = Update;
-                    var user = db.Users.Where(x => x.UserId == update.CallbackQuery.From.Id).Single();
+                    var user = db.Users.Where(x => x.Id == update.CallbackQuery.From.Id).Single();
                     var callBack = update.CallbackQuery;
                     await botClient.AnswerCallbackQueryAsync(update.CallbackQuery.Id);
-
+                    if (callBack.Data == "AddVacancy")
+                    {
+                        VacanciesManager.AddVacancу(botClient, db, update.CallbackQuery.Message);
+                    }
+                    else if(callBack.Data == "SaveVacancy")
+                    {
+                        VacanciesManager.SaveVacancу(botClient, db, update.CallbackQuery.Message);
+                    }
                 }
             }
             catch (Exception ex)
