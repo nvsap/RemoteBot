@@ -27,11 +27,11 @@ namespace RemoteBot.Models.Commands
             var chatId = message.Chat.Id;
             using (TelegramContext db = new TelegramContext())
             {
-                var User = db.Users.Where(p => p.UserId == message.From.Id).SingleOrDefault();
+                var User = db.Users.Where(p => p.Id == message.From.Id).SingleOrDefault();
                 if (User == null)
                 {
-                    User user = new User { UserId = message.From.Id, Name = message.From.Username };
-                    UserState US = new UserState { UserId = message.From.Id, State = (int)UserStatesEnum.Empty };
+                    User user = new User { Id = message.From.Id, Name = message.From.Username };
+                    UserState US = new UserState { Id = message.From.Id, State = (int)UserStatesEnum.Empty };
                     db.Users.Add(user);
                     db.UserStates.Add(US);
                     db.SaveChanges();

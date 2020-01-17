@@ -10,14 +10,12 @@ namespace RemoteBot.Managers
 {
     public class StateManager
     {
-        public static void StateUpdate(long userId, int state, int? buildingId = null)
+        public static void StateUpdate(long userId, int state)
         {
             using (TelegramContext db = new TelegramContext())
             {
-                var userState = db.UserStates.Where(x => x.UserId == userId).SingleOrDefault();
+                var userState = db.UserStates.Where(x => x.Id == userId).SingleOrDefault();
                 userState.State = state;
-                if (buildingId != null)
-                    userState.BuildingId = (int)buildingId;
                 db.UserStates.Update(userState);
                 db.SaveChanges();
             }
@@ -26,7 +24,7 @@ namespace RemoteBot.Managers
         {
             using (TelegramContext db = new TelegramContext())
             {
-                var userState = db.UserStates.Where(x => x.UserId == update.Message.From.Id).SingleOrDefault();
+                var userState = db.UserStates.Where(x => x.Id == update.Message.From.Id).SingleOrDefault();
                 ActionStateSelected(userState, db, botClient, update);
             }
         }
@@ -38,7 +36,9 @@ namespace RemoteBot.Managers
             switch (userState.State)
             {
                 case (int)UserStatesEnum.Empty://Empty
-                    break;  
+                    break;
+                case (int)UserStatesEnum.AddVacancies:
+                    break;
             }
         }
     }
