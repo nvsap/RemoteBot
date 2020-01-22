@@ -16,12 +16,14 @@ namespace RemoteBot.Models
 
         public TelegramContext()
         {
+            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:learningappbot.database.windows.net,1433; Initial Catalog=learningAppBot; User ID = nvsap; Password = Q1W2E3R4T5Y6q;");
+            optionsBuilder.UseSqlServer("Server = tcp:93.190.46.34, 33301; Initial Catalog = uh1141519_db; User Id = uh1141519_user; Password = x1rQkvnk96; ");
+            
         }
     }
 }

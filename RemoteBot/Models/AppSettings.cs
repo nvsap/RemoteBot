@@ -7,8 +7,8 @@ namespace RemoteBot.Models
 {
     public class AppSettings
     {
-        //ngrok http 1234 -host-header=”localhost:44353”
-        public static string Url { get; set; } = "https://fb15be9f.ngrok.io";// "https://learnlikeabot.biz";//"https://568ccc42.ngrok.io";
+        //ngrok http 1234 -host-header=”localhost:44303”
+        public static string Url { get; set; } = "https://56d183db.ngrok.io";// "https://learnlikeabot.biz";//"https://568ccc42.ngrok.io";
         //public static string Url { get; set; } = "https://fe5f868c.ngrok.io";
         public static string Name { get; set; } = "worzavr_vacancies_bot";
 

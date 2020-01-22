@@ -12,12 +12,11 @@ namespace RemoteBot.Models.Objects
         public int Id { get; set; }
 
         public int State { get; set; }
+        
+        public int UserId { get; set; }
 
         [ForeignKey("Id")]
-        public User User { get; set; }
-
-        [ForeignKey("Id")]
-        public Vacancу Vacancy { get; set; }
+        public Vacancу? Vacancy { get; set; }
     }
 
     public enum UserStatesEnum
