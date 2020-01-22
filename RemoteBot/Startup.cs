@@ -28,7 +28,11 @@ namespace RemoteBot
             
             services.AddTransient<TelegramContext>();
 
+<<<<<<< HEAD
             services.AddMvc(option => option.EnableEndpointRouting = false).AddNewtonsoftJson();
+=======
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+>>>>>>> master
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

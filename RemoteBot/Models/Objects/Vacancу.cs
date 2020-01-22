@@ -11,7 +11,11 @@ namespace RemoteBot.Models.Objects
         public int Id { get; set; }
 
         [ForeignKey("Id")]
+<<<<<<< HEAD
         public User? User { get; set; }
+=======
+        public User User { get; set; }
+>>>>>>> master
 
         public string Text { get; set; }
 
