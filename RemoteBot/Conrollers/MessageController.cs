@@ -27,15 +27,24 @@ namespace RemoteBot.Conrollers
 
             if (update == null) return Ok();
 
+            
             var commands = Bot.Commands;
             var message = update.Message;
             var botClient = await Bot.GetBotClientAsync();
-
             try
             {
                 if (update.Type == UpdateType.Message)
                 {
-
+                    if (UserLocker.IsUserLocked(update.Message.Chat.Id))
+                        return Ok();
+                    else
+                        UserLocker.LockUser(update.Message.Chat.Id);
+                    try
+                    {
+                        await Task.Run(() => StateManager.RemoveLastMessage(botClient, (int)update.Message.Chat.Id));
+                        await Task.Run(() => botClient.DeleteMessageAsync((int)update.Message.Chat.Id, message.MessageId));
+                    }
+                    catch { }
                     foreach (var command in commands)
                     {
                         if (command.Name == message.Text)
@@ -48,6 +57,11 @@ namespace RemoteBot.Conrollers
                 }
                 else if (update.Type == UpdateType.CallbackQuery)
                 {
+                    if (UserLocker.IsUserLocked(update.CallbackQuery.Message.Chat.Id))
+                        return Ok();
+                    else
+                        UserLocker.LockUser(update.CallbackQuery.Message.Chat.Id);
+                    StateManager.RemoveLastMessage(botClient, (int)update.CallbackQuery.Message.Chat.Id);
                     CallbackQueryManager.ChoseCallBackQuery(botClient, update);
                 }
                 return Ok();
@@ -56,6 +70,20 @@ namespace RemoteBot.Conrollers
             {
                 await botClient.SendTextMessageAsync(message.Chat.Id, "Возникла ошибка. Обратитесь к администратору с следующим текстом: " + ex.Message, Telegram.Bot.Types.Enums.ParseMode.Default);
                 return Ok();
+            }
+            finally
+            {
+                if (update != null)
+                {
+                    if (update.Type == UpdateType.Message)
+                    {
+                        UserLocker.UnlockUser(update.Message.Chat.Id);
+                    }
+                    else if (update.Type == UpdateType.CallbackQuery)
+                    {
+                        UserLocker.UnlockUser(update.CallbackQuery.Message.Chat.Id);
+                    }
+                }
             }
         }
     }

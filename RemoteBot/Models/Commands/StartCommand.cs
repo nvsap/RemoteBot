@@ -24,21 +24,26 @@ namespace RemoteBot.Models.Commands
 
         public override async Task ExecuteAsync(Message message, TelegramBotClient botClient)
         {
-            var chatId = message.Chat.Id;
+            var chatId = (int)message.Chat.Id;
             using (TelegramContext db = new TelegramContext())
             {
                 var User = db.Users.Where(p => p.Id == message.From.Id).SingleOrDefault();
                 if (User == null)
                 {
-                    User user = new User { Id = message.From.Id, Name = message.From.Username };
-                    UserState US = new UserState { Id = message.From.Id, State = (int)UserStatesEnum.Empty };
+                    User user = new User { Id = chatId, Name = message.From.Username };
+                    UserState us = new UserState { User = user, State = (int)UserStatesEnum.Empty, LastMessageId = message.MessageId };
                     db.Users.Add(user);
-                    db.UserStates.Add(US);
+                    db.UserStates.Add(us);
                     db.SaveChanges();
-                    VacanciesManager.MainMenu(user, db, message, botClient);
+
+                    UserLocker.AddUser(chatId);
+                    UserLocker.LockUser(chatId);
+
+                    VacanciesManager.MainMenu(message, botClient);
+                    
                 }
                 else
-                    VacanciesManager.MainMenu(User, db, message, botClient);
+                    VacanciesManager.MainMenu(message, botClient);
             }
         }
     }
