@@ -14,23 +14,24 @@ namespace RemoteBot.Models.Objects
         public int State { get; set; }
 <<<<<<< HEAD
         
-        public int UserId { get; set; }
-
-        [ForeignKey("Id")]
-        public Vacancу? Vacancy { get; set; }
-=======
-
-        [ForeignKey("Id")]
         public User User { get; set; }
 
-        [ForeignKey("Id")]
         public Vacancу Vacancy { get; set; }
->>>>>>> master
+
+        public int? LastMessageId { get; set; }
     }
 
     public enum UserStatesEnum
     {
         Empty,
-        AddVacancies
+        AddVacancies,
+        AddHeader,
+        AddDescription,
+        AddResponsibilities,
+        AddRequirements,
+        AddOffered,
+        AddPaymentOffers,
+        AddAdditionalComment,
+        AddContacts
     }
 }

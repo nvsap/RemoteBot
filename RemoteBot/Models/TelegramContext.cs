@@ -14,16 +14,16 @@ namespace RemoteBot.Models
 
         public DbSet<UserState> UserStates { get; set; }
 
+        public DbSet<Vacancу> Vacancies { get; set; }
+
         public TelegramContext()
         {
-            Database.EnsureDeleted();
             Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = tcp:93.190.46.34, 33301; Initial Catalog = uh1141519_db; User Id = uh1141519_user; Password = x1rQkvnk96; ");
-            
+            optionsBuilder.UseSqlServer("Server = tcp:93.190.46.34,33301; Initial Catalog=uh1141519_db2; User Id = uh1141519_user; Password = x1rQkvnk96;");
         }
     }
 }
