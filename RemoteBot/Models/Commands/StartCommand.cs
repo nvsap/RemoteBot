@@ -38,12 +38,9 @@ namespace RemoteBot.Models.Commands
 
                     UserLocker.AddUser(chatId);
                     UserLocker.LockUser(chatId);
-
-                    VacanciesManager.MainMenu(message, botClient);
-                    
                 }
-                else
-                    VacanciesManager.MainMenu(message, botClient);
+
+                VacanciesManager.MainMenu(message, botClient);
             }
         }
     }

@@ -7,13 +7,13 @@ namespace RemoteBot.Models
 {
     public class AppSettings
     {
-<<<<<<< HEAD
         //ngrok http 1234 -host-header=”localhost:44303”
-        public static string Url { get; set; } = "https://learnlikeabot.biz";// "https://learnlikeabot.biz";https://productionlearningbot.azurewebsites.net//"https://568ccc42.ngrok.io";
-        //public static string Url { get; set; } = "https://fe5f868c.ngrok.io";
+        //public static string Url { get; set; } = "https://0a865685a3a6.ngrok.io";//test url
+        public static string Url { get; set; } = "https://learnlikeabot.biz";//production url
+
         public static string Name { get; set; } = "worzavr_vacancies_bot";
 
-        //public static string Key { get; set; } = "694699768:AAFsYDKo1qn5eIizqA5CIl8m9xXUoYeZyM8";
-        public static string Key { get; set; } = "810437567:AAGVHR_kn4MPSWUWZJZDJ7d1R3FGi_EwivY"; 
+        //public static string Key { get; set; } = "1019921761:AAE1KqTauwXV82Q1-9KOvegAJSupdTxiIMc"; //test bot
+        public static string Key { get; set; } = "810437567:AAGVHR_kn4MPSWUWZJZDJ7d1R3FGi_EwivY"; //production bot
     }
 }

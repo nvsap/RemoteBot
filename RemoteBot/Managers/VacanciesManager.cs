@@ -33,9 +33,10 @@ namespace RemoteBot.Managers
                                 }
                             );
 
-            var mess = await botClient.SendTextMessageAsync(message.Chat.Id, $"Здравствуйте, {message.Chat.FirstName}.\n\n Если вы хотите выставить вакансию, " +
-                $"будет необходимо следовать инструкциям бота и отвечать на них.  Старайтесь писать кратко и по делу, донося основную суть задачи или проекта.",
-                Telegram.Bot.Types.Enums.ParseMode.Markdown, false, false, 0, keyboard);
+            var mess = await botClient.SendTextMessageAsync(message.Chat.Id, $"Здравствуйте, {message.Chat.FirstName} !\n\nЕсли вы хотите выставить вакансию, " +
+                $"будет необходимо следовать инструкциям бота и отвечать на них.  Старайтесь писать кратко и по делу, донося основную суть задачи или проекта.\n\n" +
+                $"<b>❌ Не ставьте собственные пунктиры «-, –, • и т.д.»</b>",
+                Telegram.Bot.Types.Enums.ParseMode.Html, false, false, 0, keyboard);
             StateManager.SetLastMessage(botClient, (int)message.Chat.Id, mess.MessageId);
         }
         public static async void ShowPrice(Telegram.Bot.TelegramBotClient botClient, Message message)
@@ -43,15 +44,15 @@ namespace RemoteBot.Managers
             var keyboard = new InlineKeyboardMarkup(
                                 new InlineKeyboardButton[]
                                 {
-                                            new InlineKeyboardButton{ Text = "Добавить вакансию", CallbackData = "AddVacancy"}
+                                            new InlineKeyboardButton{ Text = "Я согласен! Хочу добавить вакансию✅", CallbackData = "AddVacancy"}
 
                                 }
                             );
-            var messageText = $"Стоимость размещения вакансий:\n\n <b>690р</b> - один пост, то есть одна вакансия\n" +
-                                                                 $"<b>1990р</b> - ОПТ, 4 поста в месяц(по одной вакансии на пост)\n\n" +
-                                                                $"Вы получите: \n1.До 15 000 просмотров за первые сутки, а это до 150 откликов.\n" +
-                                                                $"2.Ваша вакансия никогда не будет удаляться из канала наберёт 24 000 - 30 000 просмотров исполнителями.\n" +
-                                                                $"3.Пост не уйдет быстро в ленту потому, что в день на канале мы публикуем до 4 публикаций.";
+            var messageText = $"Стоимость размещения вакансий:\n\n <b>990р</b> - один пост, то есть одна вакансия\n" +
+                                                                 $"<b>2690р</b> - ОПТ, 3 поста в месяц(по одной вакансии на пост)\n\n" +
+                                                                $"Вы получите: \n1. До 16 000 просмотров за первые сутки, а это до 200 откликов.\n" +
+                                                                $"2. Ваша вакансия никогда не будет удаляться из канала наберёт 24 000 - 30 000 просмотров исполнителями.\n" +
+                                                                $"3. Вакансия не улетит быстро вниз. Мы публикуем до 4-х вакансий в сутки.";
 
             await SendMessage(botClient, message, messageText, keyboard);
         }

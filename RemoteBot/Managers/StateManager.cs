@@ -25,14 +25,18 @@ namespace RemoteBot.Managers
         {
             using (TelegramContext db = new TelegramContext())
             {
-                var userState = db.UserStates.Where(x => x.User.Id == chatId).SingleOrDefault();
-                if (userState != null && userState.LastMessageId != null)
+                try
                 {
-                    await botClient.DeleteMessageAsync(chatId, (int)userState.LastMessageId);
-                    userState.LastMessageId = null;
-                    db.UserStates.Update(userState);
-                    db.SaveChanges();
+                    var userState = db.UserStates.Where(x => x.User.Id == chatId).SingleOrDefault();
+                    if (userState != null && userState.LastMessageId != null)
+                    {
+                        await botClient.DeleteMessageAsync(chatId, (int)userState.LastMessageId);
+                        userState.LastMessageId = null;
+                        db.UserStates.Update(userState);
+                        db.SaveChanges();
+                    }
                 }
+                catch { }
             }
         }
 

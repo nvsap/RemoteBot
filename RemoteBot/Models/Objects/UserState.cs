@@ -12,7 +12,6 @@ namespace RemoteBot.Models.Objects
         public int Id { get; set; }
 
         public int State { get; set; }
-<<<<<<< HEAD
         
         public User User { get; set; }
 

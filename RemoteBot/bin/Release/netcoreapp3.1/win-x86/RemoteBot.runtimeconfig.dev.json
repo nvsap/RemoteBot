@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "C:\\Users\\nvsap\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\nvsap\\.nuget\\packages"
-    ]
-  }
-}

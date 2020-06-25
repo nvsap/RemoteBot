@@ -27,7 +27,7 @@ namespace RemoteBot.Conrollers
 
             if (update == null) return Ok();
 
-            
+
             var commands = Bot.Commands;
             var message = update.Message;
             var botClient = await Bot.GetBotClientAsync();
@@ -39,12 +39,19 @@ namespace RemoteBot.Conrollers
                         return Ok();
                     else
                         UserLocker.LockUser(update.Message.Chat.Id);
-                    try
+
+                    if (commands.All(x => x.Name != message.Text))
                     {
-                        await Task.Run(() => StateManager.RemoveLastMessage(botClient, (int)update.Message.Chat.Id));
-                        await Task.Run(() => botClient.DeleteMessageAsync((int)update.Message.Chat.Id, message.MessageId));
+                        try
+                        {
+                            await Task.Run(() => StateManager.RemoveLastMessage(botClient, (int)update.Message.Chat.Id));
+                            await Task.Run(() => botClient.DeleteMessageAsync((int)update.Message.Chat.Id, message.MessageId));
+                        }
+                        catch { }
                     }
-                    catch { }
+
+
+
                     foreach (var command in commands)
                     {
                         if (command.Name == message.Text)
